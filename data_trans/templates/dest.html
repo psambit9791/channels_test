@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Destination</title>
+</head>
+<body>
+    <h1>Data Destination HTML</h1>
+    <input type="X" id="x" name="x" />
+    <input type="Y" id="y" name="y" />
+    <input type="Z" id="z" name="z" />
+    <script>
+        var socket = new WebSocket('ws://' + window.location.host + '/transfer/');
+        socket.onopen = function open() {
+          console.log('WebSockets connection created.');
+        };
+
+        socket.onmessage = function (event) {
+            received = JSON.parse(event.data);
+            document.getElementById('x').value = received["x"];
+            document.getElementById('y').value = received["y"];
+            document.getElementById('z').value = received["z"];
+
+        };
+    </script>
+</body>
+</html>
