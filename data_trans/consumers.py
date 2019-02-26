@@ -1,7 +1,7 @@
 import asyncio
 import json
 from django.contrib.auth import get_user_model
-from channels.generic.websocket import JsonWebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 from asgiref.sync import async_to_sync
@@ -38,3 +38,33 @@ class DataConsumer(AsyncJsonWebsocketConsumer):
 
     async def parse_message(self, event):
         await self.send_json(event['text'])
+
+
+class WSConsumer(AsyncWebsocketConsumer):
+
+    async def connect(self):
+        await self.channel_layer.group_add(
+            "wtrans",
+            self.channel_name
+        )
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(
+            "wtrans",
+            self.channel_name
+        )
+
+    async def receive(self, text_data):
+        # Send message to room group
+        #print('\n\n', text_data, '\n\n')
+        await self.channel_layer.group_send(
+            "wtrans",
+            {
+                "type": "parse.message",
+                "text": text_data
+            }
+        )
+
+    async def parse_message(self, event):
+        await self.send(text_data=event['text'])

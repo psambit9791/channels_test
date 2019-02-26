@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Destination</title>
+</head>
+<body>
+    <h1>WS Data Destination HTML</h1>
+    <input type="text" id="x" name="x" />
+    <script>
+        var socket = new WebSocket('ws://' + window.location.host + '/ws_transfer/');
+        socket.onopen = function open() {
+          console.log('WebSockets connection created.');
+        };
+
+        socket.onmessage = function (event) {
+            console.log(event);
+            document.getElementById('x').value = event.data;
+
+        };
+    </script>
+</body>
+</html>

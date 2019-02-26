@@ -3,15 +3,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Data Destination</title>
+    <title>JSON Destination</title>
 </head>
 <body>
-    <h1>Data Destination HTML</h1>
-    <input type="X" id="x" name="x" />
-    <input type="Y" id="y" name="y" />
-    <input type="Z" id="z" name="z" />
+    <h1>JSON Data Destination HTML</h1>
+    <input type="text" id="x" name="x" />
+    <input type="text" id="y" name="y" />
+    <input type="text" id="z" name="z" />
     <script>
-        var socket = new WebSocket('ws://' + window.location.host + '/transfer/');
+        var socket = new WebSocket('ws://' + window.location.host + '/json_transfer/');
         socket.onopen = function open() {
           console.log('WebSockets connection created.');
         };

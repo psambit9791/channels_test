@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Source</title>
+</head>
+<body>
+    <h1>JSON Data Source HTML</h1>
+    <button id="rand_gen" onclick="send_number();">Click</button>
+    <script>
+        var socket = new WebSocket('ws://' + window.location.host + '/json_transfer/');
+        socket.onopen = function open() {
+          console.log('WebSockets connection created.');
+        };
+
+        function send_number() {
+            var x = Math.random() * 100;
+            var y = Math.random() * 100;
+            var z = Math.random() * 100;
+            data = JSON.stringify({"x": x, "y": y, "z": z});
+            console.log(data);
+            socket.send(data);
+        }
+    </script>
+</body>
+</html>

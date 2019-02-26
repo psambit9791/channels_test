@@ -20,5 +20,7 @@ import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('source/', views.show_source),
-    path('dest/', views.show_dest)
+    path('dest/', views.show_dest),
+    path('wsource/', views.show_ws_source),
+    path('wdest/', views.show_ws_dest)
 ]
