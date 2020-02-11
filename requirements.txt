@@ -46,7 +46,7 @@ dask==1.0.0
 datashape==0.5.4
 decorator==4.3.0
 distributed==1.25.2
-Django==2.1.5
+Django==2.2.10
 django-cors-headers==2.2.0
 django-discover-runner==1.0
 django-filter==1.1.0
